@@ -1,5 +1,6 @@
 from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
+from vector import retriever
 
 model = OllamaLLM(model="gemma3:1b")
 
@@ -18,6 +19,7 @@ while True:
 	pregunta = input("Realiza una pregunta: ")
 	if pregunta == "q":
 		break
-	respuesta = chain.invoke({"informacion": [], "pregunta": pregunta})
+	informacion = retriever.invoke(pregunta)
+	respuesta = chain.invoke({"informacion": informacion, "pregunta": pregunta})
 	print(respuesta)
 
