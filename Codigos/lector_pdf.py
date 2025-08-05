@@ -19,7 +19,7 @@ def main():
     parser.add_argument("--reset", action="store_true", help="Reset the database.")
     args = parser.parse_args()
     if args.reset:
-        print("✨ Clearing Database")
+        print("Clearing Database")
         clear_database()
 
     # Create (or update) the data store.
@@ -69,7 +69,7 @@ def add_to_chroma(chunks: list[Document]):
         db.add_documents(new_chunks, ids=new_chunk_ids)
         db.persist()
     else:
-        print("✅ No new documents to add")
+        print("No new documents to add")
 
 
 def calculate_chunk_ids(chunks):

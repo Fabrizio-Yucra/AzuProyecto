@@ -20,7 +20,7 @@ while True:
     if pregunta.lower() == "q":
         break
     informacion = retriever(pregunta)
-    #print("🔎 CONTEXTO EXTRAÍDO:\n", informacion)
+    #print(" CONTEXTO EXTRAÍDO:\n", informacion)
     
     respuesta = chain.invoke({"informacion": informacion, "pregunta": pregunta})
-    print("\n🧠 Respuesta:\n", respuesta)
+    print("\n Respuesta:\n", respuesta)
