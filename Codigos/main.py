@@ -3,10 +3,10 @@ from langchain_core.prompts import ChatPromptTemplate
 from lector_pdf import retriever  # Activa esta línea
 
 model = OllamaLLM(model="gemma3:1b")
-
+#"gemma3:1b"
 template = """
 Eres un experto resolviendo preguntas frecuentes en una universidad de alto prestigio
-Quiero que sea lo mas corto y claro posible
+Quiero que tus respuestas sean lo mas corto, claro posible y en español  
 Aquí se encuentra la información necesaria: {informacion}
 
 Aquí está la pregunta para responder: {pregunta}
