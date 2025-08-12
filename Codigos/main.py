@@ -1,9 +1,9 @@
 from langchain_ollama.llms import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
-from lector_pdf import retriever  # Activa esta línea
+from lector_pdf import retriever  
 
 model = OllamaLLM(model="gemma3:1b")
-#"gemma3:1b"
+
 template = """
 Eres un experto resolviendo preguntas frecuentes en una universidad de alto prestigio
 Quiero que tus respuestas sean lo mas corto, claro posible y en español  
@@ -20,7 +20,6 @@ while True:
     if pregunta.lower() == "q":
         break
     informacion = retriever(pregunta)
-    #print(" CONTEXTO EXTRAÍDO:\n", informacion)
-    
+
     respuesta = chain.invoke({"informacion": informacion, "pregunta": pregunta})
     print("\n Respuesta:\n", respuesta)
