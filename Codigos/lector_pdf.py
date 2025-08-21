@@ -35,11 +35,17 @@ def load_documents():
 
 def split_documents(documents: list[Document]):
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=50,
-        length_function=len,
-        is_separator_regex=False,
-    )
+    chunk_size=350,       # más pequeños
+    chunk_overlap=35,
+    separators=[
+        "1.-", "2.-", "3.-", "4.-", "5.-", "6.-", "7.-", "8.-", "9.-", 
+        "10.-", "11.-", "12.-", "13.-", "14.-", "15.-", "16.-", "17.-", 
+        "\n\n", "\n", "•", "-"
+    ],
+    keep_separator=True
+)
+
+
     return text_splitter.split_documents(documents)
 
 
@@ -110,8 +116,16 @@ def retriever(pregunta: str) -> str:
         persist_directory=CHROMA_PATH,
         embedding_function=get_embedding_function()
     )
-    resultados = db.similarity_search(pregunta, k=4)
+    retr = db.as_retriever(
+    search_type="similarity",  # más preciso que MMR en tu caso
+    search_kwargs={"k": 2}     # trae solo 2 chunks más relevantes
+)
+
+
+    resultados = retr.get_relevant_documents(pregunta)
+
     return "\n\n".join([doc.page_content for doc in resultados])
+
 
 if __name__ == "__main__":
     main()
